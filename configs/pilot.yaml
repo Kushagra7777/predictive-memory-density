@@ -1,0 +1,101 @@
+profile: formal
+seeds: [17, 29, 43]
+generator:
+  reliability: 0.8
+  nuisance_length: 16
+  max_context: 64
+  waiting_probs: [0.4, 0.4, 0.1, 0.1]  # a, b, ?, R
+model:
+  vocab_size: 8
+  context: 64
+  layers: 4
+  width: 128
+  heads: 4
+  ff_width: 512
+  dropout: 0.0
+  init_std: 0.02
+train:
+  steps: 6000
+  batch_size: 128
+  learning_rate: 0.0003
+  min_learning_rate: 0.00003
+  warmup: 200
+  betas: [0.9, 0.95]
+  eps: 1.0e-8
+  weight_decay: 0.01
+  clip: 1.0
+  validation_every: 200
+  validation_episodes: 4096
+  bf16: true
+smoke:
+  steps: 300
+  batch_size: 32
+  validation_episodes: 128
+analysis:
+  roots_fit: 20000
+  roots_val: 4000
+  root_delays: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  collection_batch: 128
+  shard_size: 512
+  sources: [last_residual, all_layers, cache_summary]
+  families: [density2, classical4, vector3, classical2]
+  pca_width: 128
+  encoder_hidden: 32
+  restarts: [101, 211, 307]
+  steps: 3000
+  batch_size: 256
+  learning_rate: 0.001
+  betas: [0.9, 0.999]
+  clip: 1.0
+  rollout: 4
+  consistency_weight: 0.1
+  validation_every: 100
+  time_match_baselines: true
+  operator_epsilon: 1.0e-6
+  ridge_alphas: [0.0, 0.001, 0.01, 0.1, 1.0, 10.0, 100.0]
+eval:
+  ordinary_families: 1024
+  long_families: 512
+  ordinary_delays: [4, 8, 12]
+  long_delays: [24, 32]
+  tree_ordinary_families: 256
+  tree_long_families: 128
+  tree_horizons: [1, 2, 3]
+  continuations: ['?', 'ab?', 'ababab?']
+  rollout_steps: [1, 4, 8]
+  natural_episodes: 1024
+  cache_checks: 1024
+  bootstrap_samples: 2000
+  matching_tv: 0.01
+  benchmark_batches: [1, 256]
+  benchmark_repeats: 30
+gates:
+  oracle_error: 1.0e-12
+  cache_logit_error: 1.0e-5
+  cache_tv: 1.0e-6
+  waiting_oracle_tv: 0.01
+  query_oracle_mae: 0.03
+  query_oracle_p95: 0.08
+  impossible_mass: 0.005
+  matched_fraction: 0.90
+  query_gap: 0.50
+  reset_tv: 0.03
+  root_tv: 0.02
+  joint3_tv: 0.05
+  update_distance1: 0.05
+  update_distance8: 0.10
+  rollout_tv4: 0.03
+  rollout_tv8: 0.05
+  long_teacher_query_mae: 0.05
+  long_output_tv: 0.05
+  long_joint3_tv: 0.07
+  causal_effect_median: 0.20
+  causal_effect_lower: 0.10
+  reset_effect_mae: 0.03
+  patched_impossible_mass: 0.01
+  effect_mae: 0.05
+  effect_sign_accuracy: 0.90
+  effect_sign_minimum: 0.10
+  patched_future_tv: 0.05
+  density_relative_gain: 0.20
+  density_absolute_gain: 0.01

@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Cite the exact code commit and the primary papers listed in docs/RELATED_WORK.md. This repository implements a proposed pilot, not an established research finding."
+title: "Predictive Memory Density: Same prediction now, different memory later"
+authors:
+  - family-names: Srivastav
+    given-names: Kushagra
+version: 0.1.0
+date-released: 2026-10-22
+type: software

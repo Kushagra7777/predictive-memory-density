@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "predictive-memory-density"
+version = "0.1.0"
+description = "Protocol-driven experiments on matched predictions, persistent transformer memory, and compact density states"
+requires-python = ">=3.10"
+dynamic = ["dependencies"]
+
+[project.scripts]
+pmd = "pmd.cli:main"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"

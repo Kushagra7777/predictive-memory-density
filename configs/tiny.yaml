@@ -1,0 +1,34 @@
+# Implementation integration test only. This profile cannot produce a scientific green signal.
+extends: pilot.yaml
+profile: integration
+seeds: [17]
+train:
+  steps: 3
+  batch_size: 4
+  warmup: 1
+  validation_every: 1
+  validation_episodes: 8
+  bf16: false
+smoke:
+  steps: 3
+  batch_size: 4
+  validation_episodes: 8
+analysis:
+  roots_fit: 128
+  roots_val: 16
+  collection_batch: 16
+  shard_size: 32
+  restarts: [101]
+  steps: 2
+  batch_size: 8
+  validation_every: 1
+  time_match_baselines: false
+eval:
+  ordinary_families: 2
+  long_families: 1
+  tree_ordinary_families: 1
+  tree_long_families: 1
+  natural_episodes: 4
+  cache_checks: 4
+  bootstrap_samples: 40
+  benchmark_repeats: 2

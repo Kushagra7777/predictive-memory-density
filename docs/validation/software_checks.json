@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-22",
+  "device": "cpu",
+  "cuda_available": false,
+  "unit_tests_passed": 26,
+  "smoke": {
+    "seed": 17,
+    "smoke": true,
+    "parameter_count": 803592,
+    "initial_loss": 2.140043020248413,
+    "final_loss": 0.8231562972068787,
+    "best_validation": 0.8526055216789246,
+    "unmasked_targets": 276348,
+    "elapsed_seconds": 40.49666550599977,
+    "amp_bfloat16": false
+  },
+  "smoke_cache_checks": {
+    "logit_max": 9.5367431640625e-07,
+    "tv_max": 3.459281288087368e-07,
+    "self_swap_tv_max": 0.0,
+    "full_donor_tv_max": 0.0,
+    "prefixes": 32,
+    "precision": "FP32",
+    "residual_only_forced_tv_max": 0.0,
+    "passed": true
+  },
+  "integration": {
+    "profile": "integration",
+    "seed": 17,
+    "records": {
+      "pairs": 6,
+      "ordinary": 144,
+      "joints": 288,
+      "effects": 1728,
+      "updates": 288
+    },
+    "all_eight_tokens_scored": true,
+    "teacher_refreshed_surrogate": false,
+    "interventions_used_for_fitting": false
+  },
+  "full_gpu_pilot_performed": false
+}

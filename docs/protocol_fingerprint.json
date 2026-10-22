@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "proposal_file": "docs/proposal/chatgpt-pro-research-methodology.pdf",
+  "proposal_sha256": "3df3d2aae3b7719f936e0a25b1b53055968cb355f6f31f1970ba35ca2c8c15e0",
+  "resolved_config_sha256": "09c93a883b52e5a98c6b8697a667be8abc3c6b3189cb1efb119503c6bdec28ad",
+  "proposal_date": "2026-10-21",
+  "implementation_date": "2026-10-22"
+}
