@@ -8,34 +8,7 @@ The candidate description is a **2-by-2 complex density matrix**, stored as thre
 
 The source proposal is included in [docs/proposal/chatgpt-pro-research-methodology.pdf](docs/proposal/chatgpt-pro-research-methodology.pdf). Read [protocol coverage](docs/PROTOCOL_COVERAGE.md) for the section-by-section implementation map and [implementation decisions](docs/IMPLEMENTATION_DECISIONS.md) for choices the proposal leaves unspecified.
 
-## 1. Put this repository on your Mac and publish it
-
-Extract the delivered ZIP inside your existing folder:
-
-```bash
-mkdir -p /Users/kushagrasrivastav/Documents/Papers-reading
-unzip -n ~/Downloads/predictive-memory-density.zip -d /Users/kushagrasrivastav/Documents/Papers-reading
-cd /Users/kushagrasrivastav/Documents/Papers-reading/predictive-memory-density
-```
-
-This creates a dedicated project inside `Papers-reading`; it does not merge unrelated reading notes into the experiment. The archive does not contain machine-specific Git history. If `Papers-reading` is already a Git repository, keep this as a subfolder of that repository. Otherwise initialize this project with:
-
-```bash
-git init -b main
-git add .
-git commit -m "Implement predictive-memory density pilot"
-```
-
-Create your chosen empty GitHub repository, then use the remote URL shown by GitHub:
-
-```bash
-git remote add origin YOUR_GITHUB_REPOSITORY_URL
-git push -u origin main
-```
-
-Replace the capitalized URL with your actual URL. Git must already have your name/email configured to commit. No repository is published automatically. Results, checkpoints, virtual environments, and feature banks are excluded by `.gitignore`.
-
-## 2. Clone and install on the GPU machine
+## 1. Clone and install on the GPU machine
 
 Use **Python 3.12** in a fresh environment. The tested dependency versions are in `constraints-tested.txt`; `requirements.txt` lists the supported dependency ranges. Python 3.10+ is allowed by the package, but the constrained versions were checked with 3.12.
 
@@ -70,7 +43,7 @@ After masking, physical GPU 1 is logical **`cuda:0`** inside Python. Do not pass
 
 The proposal assumes at least **32 GB host RAM**, one 24–32 GB GPU, and local disk. Your A800's 40 GB exceeds that assumed GPU capacity. Allow roughly **20 GB free disk initially**, then inspect actual usage; this is a working allowance, not a measured full-pilot requirement. Feature banks and detailed per-case results dominate storage. No distributed training or combination of the two GPUs is required.
 
-## 3. Run the checks first
+## 2. Run the checks first
 
 Run from the repository root with the environment active:
 
@@ -91,7 +64,7 @@ python scripts/validate_run.py --run-dir runs/tiny-check
 
 The tiny profile deliberately uses almost no training. Its only possible decision label is `IMPLEMENTATION_ONLY`. Bad predictions in this run are expected. It cannot produce a scientific green signal.
 
-## 4. Run the full proposal
+## 3. Run the full proposal
 
 ```bash
 bash scripts/run_pilot.sh runs/pilot-v1
@@ -144,7 +117,7 @@ python -m pmd report --run-dir runs/pilot-v1 --device cpu
 
 All commands default to `configs/pilot.yaml`; explicitly supply another config for a nonformal run. The `preprocess` stage can be run separately before `fit`. A single teacher cannot satisfy the three-seed decision rule.
 
-## 5. Find the results
+## 4. Find the results
 
 Everything is saved automatically under the chosen run directory; no results need to be copied by hand. Start with:
 
@@ -198,7 +171,7 @@ The inspection command prints the two token histories, real and imaginary matrix
 
 Open `plots/seed_17_bloch_ball.html` in a browser for a rotatable three-dimensional view. Other figures show prediction timelines, memory swaps, predicted/actual effects, calibration, autonomous updates, long-delay errors, interactions, posterior diagnostics, training, and latency. Bloch axes are coordinates, not named semantic variables; across-teacher axes are not aligned.
 
-## 6. Keep the experiment honest
+## 5. Keep the experiment honest
 
 `configs/pilot.yaml` is the frozen proposal configuration. A formal run is checked against `docs/protocol_fingerprint.json`. To revise training or hypotheses after a failure, copy the config, set `profile: exploratory`, choose a **new** run directory, and record why you changed it. Do not relax a threshold after seeing final-test outcomes and describe that as the original experiment.
 
